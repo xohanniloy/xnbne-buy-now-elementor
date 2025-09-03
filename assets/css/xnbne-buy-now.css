@@ -1,0 +1,371 @@
+/**
+ * XNBNE Buy Now Widget CSS
+ * File: assets/css/xnbne-buy-now.css
+ */
+
+/* ==========================================================================
+   Widget Wrapper
+   ========================================================================== */
+.xnbne-buy-now-widget-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    font-family: inherit;
+}
+
+.xnbne-buy-now-widget-wrapper * {
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Quantity Wrapper
+   ========================================================================== */
+.xnbne-quantity-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.xnbne-quantity-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.xnbne-quantity-input {
+    width: 70px;
+    padding: 10px 8px;
+    border: 2px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    background: #fff;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.xnbne-quantity-input::-webkit-outer-spin-button,
+.xnbne-quantity-input::-webkit-inner-spin-button {
+    /* -webkit-appearance: none; */
+    margin: 0;
+}
+
+.xnbne-quantity-input:focus {
+    outline: none;
+    border-color: #007cba;
+    box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.1);
+}
+
+.xnbne-quantity-input:hover {
+    border-color: #c3c4c7;
+}
+
+/* ==========================================================================
+   Buy Now Button
+   ========================================================================== */
+.xnbne-buy-now-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #007cba 0%, #005a87 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    min-height: 48px;
+    min-width: 120px;
+}
+
+.xnbne-buy-now-button:hover {
+    background: linear-gradient(135deg, #005a87 0%, #003f5c 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 124, 186, 0.3);
+}
+
+.xnbne-buy-now-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 124, 186, 0.2);
+}
+
+.xnbne-buy-now-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 124, 186, 0.2);
+}
+
+.xnbne-buy-now-button:disabled,
+.xnbne-buy-now-button.xnbne-processing {
+    opacity: 0.8;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none;
+}
+
+/* Full Width Button */
+.xnbne-buy-now-button.xnbne-full-width {
+    width: 100%;
+    display: flex;
+}
+
+/* ==========================================================================
+   Button Content
+   ========================================================================== */
+.xnbne-button-text {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.xnbne-button-loader {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.xnbne-processing .xnbne-button-text {
+    display: none;
+}
+
+.xnbne-processing .xnbne-button-loader {
+    display: flex;
+}
+
+/* ==========================================================================
+   Loading Spinner
+   ========================================================================== */
+.xnbne-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: xnbne-spin 0.8s linear infinite;
+}
+
+@keyframes xnbne-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Messages
+   ========================================================================== */
+.xnbne-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 400px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    z-index: 999999;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.xnbne-message.xnbne-show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.xnbne-message.xnbne-hide {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.xnbne-message-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.xnbne-message-error {
+    background: linear-gradient(135deg, #dc3545 0%, #e83e8c 100%);
+}
+
+.xnbne-message-info {
+    background: linear-gradient(135deg, #17a2b8 0%, #6f42c1 100%);
+}
+
+.xnbne-message span {
+    display: block;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   Editor Notice
+   ========================================================================== */
+.xnbne-editor-notice {
+    padding: 20px;
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    text-align: center;
+    color: #6c757d;
+}
+
+.xnbne-editor-notice p {
+    margin: 0;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+@media (max-width: 768px) {
+    .xnbne-buy-now-widget-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    
+    .xnbne-quantity-wrapper {
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .xnbne-quantity-input {
+        width: 80px;
+    }
+    
+    .xnbne-buy-now-button {
+        width: 100%;
+        padding: 16px 20px;
+        font-size: 18px;
+        min-height: 54px;
+    }
+    
+    .xnbne-message {
+        right: 15px;
+        left: 15px;
+        top: 15px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .xnbne-buy-now-widget-wrapper {
+        gap: 10px;
+    }
+    
+    .xnbne-quantity-wrapper {
+        gap: 6px;
+    }
+    
+    .xnbne-quantity-label {
+        font-size: 13px;
+    }
+    
+    .xnbne-quantity-input {
+        width: 60px;
+        padding: 8px 6px;
+        font-size: 14px;
+    }
+    
+    .xnbne-buy-now-button {
+        padding: 14px 16px;
+        font-size: 16px;
+        min-height: 50px;
+    }
+}
+
+/* ==========================================================================
+   RTL Support
+   ========================================================================== */
+[dir="rtl"] .xnbne-buy-now-widget-wrapper {
+    direction: rtl;
+}
+
+[dir="rtl"] .xnbne-quantity-wrapper {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .xnbne-message {
+    right: auto;
+    left: 20px;
+}
+
+/* ==========================================================================
+   High Contrast Mode
+   ========================================================================== */
+@media (prefers-contrast: high) {
+    .xnbne-buy-now-button {
+        background: #000;
+        border: 2px solid #fff;
+    }
+    
+    .xnbne-buy-now-button:hover {
+        background: #333;
+    }
+    
+    .xnbne-quantity-input {
+        border-color: #000;
+        background: #fff;
+    }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    .xnbne-buy-now-button,
+    .xnbne-quantity-input,
+    .xnbne-message,
+    .xnbne-spinner {
+        transition: none;
+        animation: none;
+    }
+    
+    .xnbne-buy-now-button:hover {
+        transform: none;
+    }
+}
+
+/* ==========================================================================
+   Dark Mode Support
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+    .xnbne-quantity-label {
+        color: #e1e5e9;
+    }
+    
+    .xnbne-quantity-input {
+        background: #2c3338;
+        border-color: #50575e;
+        color: #e1e5e9;
+    }
+    
+    .xnbne-quantity-input:focus {
+        border-color: #007cba;
+    }
+    
+    .xnbne-editor-notice {
+        background: #2c3338;
+        border-color: #50575e;
+        color: #e1e5e9;
+    }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+@media print {
+    .xnbne-buy-now-widget-wrapper,
+    .xnbne-message {
+        display: none !important;
+    }
+}
