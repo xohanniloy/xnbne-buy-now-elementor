@@ -63,8 +63,6 @@
         .always(() => this.setLoadingState($button, false));
     }
 
-
-
     /**
      * Extract button data
      */
@@ -130,15 +128,13 @@
       }
 
       if (data.redirect_url) {
+        // Skip smooth scroll after reload
+        window.xnbneSkipSmoothScroll = true;
         this.redirectToCheckout(data.redirect_url);
       }
-
     }
 
-  
-
-   // AJAX success
-
+    // AJAX success
 
     /**
      * Handle error response
@@ -155,8 +151,6 @@
       // Trigger custom error event
       $(document).trigger('xnbne_add_to_cart_error', [xhr.responseJSON]);
     }
-
-
 
     /**
      * Set loading state
@@ -222,27 +216,18 @@
     /**
      * Redirect to checkout
      */
-    // redirectToCheckout(url) {
-    //   // Add slight delay for better UX
-    //   setTimeout(() => {
-    //     window.location.href = url;
-    //   }, 500);
-    // }
-
-    // redirectToCheckout(url) {
-    //   setTimeout(() => {
-    //     window.location.assign(url); // force reload + hash
-    //   }, 500);
-    // }
 
     redirectToCheckout(url) {
-      setTimeout(() => {
-        // Force full page reload to the URL with hash
-        window.location.href = url;
-        window.location.reload(); // ensures reload even if hash is same
-      }, 500);
-    }
+      // Add dummy param to force reload
+      const urlObj = new URL(url, window.location.origin);
 
+      // Only add if not already present
+      if (!urlObj.searchParams.has('reload')) {
+        urlObj.searchParams.set('reload', Date.now());
+      }
+
+      window.location.href = urlObj.toString();
+    }
 
     /**
      * Handle smooth scroll to section
@@ -252,7 +237,10 @@
       if (hash && hash.length > 1) {
         const $target = $(hash);
         if ($target.length) {
-          this.smoothScrollTo($target);
+          // Optional: animate only if page loaded normally, not via Buy Now
+          if (!window.xnbneSkipSmoothScroll) {
+            this.smoothScrollTo($target);
+          }
         }
       }
     }
@@ -260,12 +248,11 @@
     /**
      * Smooth scroll to element
      */
- 
+
     smoothScrollTo($element, offset = 100) {
       const targetPosition = $element.offset().top - offset;
       $('html, body').animate({ scrollTop: targetPosition }, { duration: 800, easing: 'swing' });
-  }
-
+    }
 
     /**
      * Handle page load
@@ -284,11 +271,8 @@
   /**
    * Initialize when document is ready
    */
-  // $(document).ready(function () {
-  //   new XNBNEBuyNowHandler();
-  // });
 
-    $(document).ready(function () {
+  $(document).ready(function () {
     new XNBNEBuyNowHandler();
   });
 
