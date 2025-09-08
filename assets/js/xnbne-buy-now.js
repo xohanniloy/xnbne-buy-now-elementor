@@ -63,6 +63,8 @@
         .always(() => this.setLoadingState($button, false));
     }
 
+
+
     /**
      * Extract button data
      */
@@ -127,14 +129,16 @@
         this.showMessage(data.message, 'success');
       }
 
-    //   if (typeof wc_add_to_cart_params !== 'undefined') {
-    //     $(document.body).trigger('added_to_cart', [data, null, $button]);
-    //   }
-
       if (data.redirect_url) {
         this.redirectToCheckout(data.redirect_url);
       }
+
     }
+
+  
+
+   // AJAX success
+
 
     /**
      * Handle error response
@@ -151,6 +155,8 @@
       // Trigger custom error event
       $(document).trigger('xnbne_add_to_cart_error', [xhr.responseJSON]);
     }
+
+
 
     /**
      * Set loading state
@@ -216,12 +222,27 @@
     /**
      * Redirect to checkout
      */
+    // redirectToCheckout(url) {
+    //   // Add slight delay for better UX
+    //   setTimeout(() => {
+    //     window.location.href = url;
+    //   }, 500);
+    // }
+
+    // redirectToCheckout(url) {
+    //   setTimeout(() => {
+    //     window.location.assign(url); // force reload + hash
+    //   }, 500);
+    // }
+
     redirectToCheckout(url) {
-      // Add slight delay for better UX
       setTimeout(() => {
+        // Force full page reload to the URL with hash
         window.location.href = url;
+        window.location.reload(); // ensures reload even if hash is same
       }, 500);
     }
+
 
     /**
      * Handle smooth scroll to section
@@ -239,19 +260,12 @@
     /**
      * Smooth scroll to element
      */
+ 
     smoothScrollTo($element, offset = 100) {
       const targetPosition = $element.offset().top - offset;
+      $('html, body').animate({ scrollTop: targetPosition }, { duration: 800, easing: 'swing' });
+  }
 
-      $('html, body').animate(
-        {
-          scrollTop: targetPosition,
-        },
-        {
-          duration: 800,
-          easing: 'swing',
-        }
-      );
-    }
 
     /**
      * Handle page load
@@ -270,7 +284,11 @@
   /**
    * Initialize when document is ready
    */
-  $(document).ready(function () {
+  // $(document).ready(function () {
+  //   new XNBNEBuyNowHandler();
+  // });
+
+    $(document).ready(function () {
     new XNBNEBuyNowHandler();
   });
 

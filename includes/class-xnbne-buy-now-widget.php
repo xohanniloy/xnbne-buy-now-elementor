@@ -87,9 +87,9 @@ class XNBNE_Buy_Now_Widget extends \Elementor\Widget_Base {
             [
                 'label' => __('Checkout Section ID', 'xnbne-buy-now'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'checkout-form',
+                'default' => 'xn-customcheckout',
                 'description' => __('Enter the ID of your checkout section (without #)', 'xnbne-buy-now'),
-                'placeholder' => 'checkout-form',
+                'placeholder' => 'xn-customcheckout',
             ]
         );
         
